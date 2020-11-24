@@ -39,8 +39,32 @@ public class TankFrame extends Frame{
 	
 	class MyKeyListener extends KeyAdapter{
 		
+		boolean bL = false;
+		boolean bU = false;
+		boolean bR = false;
+		boolean bD = false;
+		
 		@Override
 		public void keyPressed(KeyEvent e) {
+			int key = e.getKeyCode(); // 获取 键 的代码
+			switch(key) {
+			case KeyEvent.VK_LEFT:
+				bL = true;
+			break;
+			
+			case KeyEvent.VK_UP:
+				bU = true;
+			break;
+			
+			case KeyEvent.VK_RIGHT:
+				bR = true;
+			break;
+			
+			case KeyEvent.VK_DOWN:
+				bD = true;
+			break;
+			}
+			
 			System.out.println("keyPressed");
 			x +=200;
 			repaint();       //重新触发paint方法
