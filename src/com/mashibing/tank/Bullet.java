@@ -14,7 +14,8 @@ import java.awt.*;
 public class Bullet {
 
     private static final int SPEED = 10;
-    private static int WIDTH =30,HEIGHT =30;
+    public static int WIDTH =ResourceMgr.bulletD.getWidth();
+    public static int HEIGHT =ResourceMgr.bulletD.getHeight();
     private int x,y;
     private Dir dir;
     private TankFrame tf;
@@ -34,16 +35,16 @@ public class Bullet {
 
         switch (dir) {
             case LEFT:
-                g.drawImage(ResourceMgr.bulletD,x,y,null);
+                g.drawImage(ResourceMgr.bulletL,x,y,null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.bulletL,x,y,null);
+                g.drawImage(ResourceMgr.bulletR,x,y,null);
                 break;
             case UP:
                 g.drawImage(ResourceMgr.bulletU,x,y,null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.bulletR,x,y,null);
+                g.drawImage(ResourceMgr.bulletD,x,y,null);
                 break;
         }
 

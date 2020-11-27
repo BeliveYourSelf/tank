@@ -13,6 +13,8 @@ public class Tank {
     private int x,y;
     private Dir dir = Dir.DOWN;
     private final int SPEED = 5;
+    public static int WIDTH =ResourceMgr.tankD.getWidth();
+    public static int HEIGHT =ResourceMgr.tankD.getHeight();
     private TankFrame tf;
 
 
@@ -40,13 +42,13 @@ public class Tank {
                 g.drawImage(ResourceMgr.tankL,x,y,null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankL,x,y,null);
+                g.drawImage(ResourceMgr.tankR,x,y,null);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.tankL,x,y,null);
+                g.drawImage(ResourceMgr.tankU,x,y,null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankL,x,y,null);
+                g.drawImage(ResourceMgr.tankD,x,y,null);
                 break;
         }
 
@@ -81,6 +83,8 @@ public class Tank {
     }
 
     public void fire() {
-        tf.bullets.add(new Bullet(x,y,dir,tf));
+        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
+        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+        tf.bullets.add(new Bullet(bX,bY,dir,tf));
     }
 }
