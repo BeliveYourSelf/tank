@@ -27,6 +27,7 @@ public class TankFrame extends Frame{
 			}
 		});
 	}
+
 	// 系统自动调用：当窗口需要重新绘制（打开窗口，移动窗口，关闭窗口。。。）
 	@Override
 	public void paint(Graphics g) {
@@ -88,15 +89,20 @@ public class TankFrame extends Frame{
 					bD = false;
 					break;
 			}
-//			setMainTankDir();
+			setMainTankDir();
 		}
 
 		public void setMainTankDir() {
-			// TODO Auto-generated method stub
+
+			if(!bL && !bU && !bD && !bR) myTank.setMoving(false);
+			else {
+				myTank.setMoving(true);
+			}
 			if(bL) myTank.setDir(Dir.LEFT);
 			if(bU) myTank.setDir(Dir.UP);
 			if(bD) myTank.setDir(Dir.DOWN);
 			if(bR) myTank.setDir(Dir.RIGHT);
+
 		}
 
 	}
