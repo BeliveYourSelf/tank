@@ -3,6 +3,7 @@ package com.mashibing.tank;/**
  */
 
 import java.awt.*;
+import java.util.List;
 
 /**
  * @Author Administrator
@@ -54,5 +55,21 @@ public class Bullet {
                 break;
         }
         if(x <0 || y<0 || x>TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT) live = false;
+        if(tf.tanks.size()>0){
+            List<Tank> tanks = tf.tanks;
+            for(int i=0;i<tanks.size();i++){
+                Tank tank = tanks.get(i);
+                int tankX = tank.getX();
+                int tankY = tank.getY();
+                int blx = this.x - WIDTH;
+                int brx = this.x + WIDTH;
+                int buy = this.y - HEIGHT;
+                int bdy = this.y + HEIGHT;
+                if( blx < tankX && tankX < brx   && buy < tankY  &&  tankY < bdy ) {
+                    this.live = false;
+                    tank.setLive(false);
+                }
+            }
+        }
     }
 }

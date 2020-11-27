@@ -2,7 +2,10 @@ package com.mashibing.tank;/**
  * Created by Administrator on 2020/11/27 13:40
  */
 
-import java.awt.*; /**
+import java.awt.*;
+import java.util.List;
+
+/**
  * @Author Administrator
  * @Description TODO
  * Date 2020/11/27 13:40
@@ -14,7 +17,31 @@ public class Tank {
     private Dir dir = Dir.DOWN;
     private final int SPEED = 5;
     private TankFrame tf;
+    private boolean live = true;
 
+    public boolean isLive() {
+        return live;
+    }
+
+    public void setLive(boolean live) {
+        this.live = live;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 
     private boolean moving = false;
 
@@ -67,6 +94,12 @@ public class Tank {
                 y += SPEED;
                 break;
         }
+
+        List<Tank> tanks = tf.tanks;
+        for (int i = 0; i < tanks.size(); i++) {
+            if(!tanks.get(i).live) tanks.remove(i);
+        }
+
     }
 
     public void fire() {

@@ -7,10 +7,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TankFrame extends Frame{
 
 	Tank myTank = new Tank(200,200,Dir.DOWN,this);
+	List<Tank> tanks = new ArrayList<>();
+
 
 	List<Bullet> bullets = new ArrayList<>();
 	Bullet bullet = new Bullet(300,300,Dir.DOWN,this);
@@ -32,6 +35,11 @@ public class TankFrame extends Frame{
 				System.exit(0);
 			}
 		});
+
+		for(int i = 0; i<10;i++){
+			Tank tank = new Tank(new Random().nextInt(GAME_WIDTH), new Random().nextInt(GAME_HEIGHT), Dir.DOWN, this);
+			tanks.add(tank);
+		}
 	}
 
     // TODO 解决屏幕闪动-双缓冲问题(加完之后，坦克和子弹变型)
@@ -54,6 +62,10 @@ public class TankFrame extends Frame{
 	public void paint(Graphics g) {
 
 		myTank.paint(g);   //Tank自己画，比较合适
+
+		for (int i=0;i< tanks.size();i++) {
+			tanks.get(i).paint(g);
+		}
 
         for (int i=0;i<bullets.size();i++) {
             bullets.get(i).paint(g);
