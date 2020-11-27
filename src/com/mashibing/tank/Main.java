@@ -12,7 +12,7 @@ public class Main {
 		TankFrame tf = new TankFrame();
 		//初始化地方坦克
 		for (int i = 0; i < 5; i++) {
-			tf.tanks.add(new Tank(50 +i*60,200,Dir.DOWN,tf));
+			tf.tanks.add(new Tank(50 +i*60,200,Dir.DOWN,Group.BAD,tf));
 		}
 		while(true) {			// 让黑块自动移动
 			Thread.sleep(50);

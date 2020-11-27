@@ -2,7 +2,10 @@ package com.mashibing.tank;/**
  * Created by Administrator on 2020/11/27 13:40
  */
 
-import java.awt.*; /**
+import java.awt.*;
+import java.util.Random;
+
+/**
  * @Author Administrator
  * @Description TODO
  * Date 2020/11/27 13:40
@@ -11,8 +14,24 @@ import java.awt.*; /**
  **/
 public class Tank {
     private int x,y;
-
     private boolean live = true;
+    private Dir dir = Dir.DOWN;
+    private final int SPEED = 5;
+    public static int WIDTH =ResourceMgr.tankD.getWidth();
+    public static int HEIGHT =ResourceMgr.tankD.getHeight();
+    private TankFrame tf;
+    private boolean moving = true;
+    private Random random =new Random();
+    private Group group = Group.BAD;
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
     public int getX() {
         return x;
     }
@@ -28,16 +47,6 @@ public class Tank {
     public void setY(int y) {
         this.y = y;
     }
-
-    private Dir dir = Dir.DOWN;
-    private final int SPEED = 5;
-    public static int WIDTH =ResourceMgr.tankD.getWidth();
-    public static int HEIGHT =ResourceMgr.tankD.getHeight();
-    private TankFrame tf;
-
-
-    private boolean moving = false;
-
     public Dir getDir() {
         return dir;
     }
@@ -46,11 +55,12 @@ public class Tank {
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir,TankFrame tf) {
+    public Tank(int x, int y, Dir dir,Group group,TankFrame tf) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -99,12 +109,14 @@ public class Tank {
                 y += SPEED;
                 break;
         }
+
+        if (random.nextInt(10)>8) fire();
     }
 
     public void fire() {
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tf.bullets.add(new Bullet(bX,bY,dir,tf));
+        tf.bullets.add(new Bullet(bX,bY,dir,this.group,tf));
     }
 
     public void die() {
