@@ -15,6 +15,7 @@ import java.io.IOException;
  **/
 public class ResourceMgr {
     public static BufferedImage tankL,tankU,tankR,tankD;
+    public static BufferedImage bulletL,bulletU,bulletR,bulletD;
 
     static {
         try {
@@ -22,6 +23,15 @@ public class ResourceMgr {
             tankR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tank.jpg"));
             tankD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tank.jpg"));
             tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tank.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tank.jpg"));
+            bulletR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tank.jpg"));
+            bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tank.jpg"));
+            bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tank.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
