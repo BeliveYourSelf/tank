@@ -9,110 +9,96 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame{
 
-	int x =200 , y=200;
-	
-	Dir dir = Dir.DOWN;
-	
-	private final int SPEED = 10;
-	
+	Tank myTank = new Tank(200,200,Dir.DOWN);
+
 	public TankFrame() {
-		
+
 		setSize(800, 600);
-		setResizable(false);  // ¹Ì¶¨´°¿Ú´óĞ¡
-		setTitle("tank war"); // ÉèÖÃ±êÌâÀ¸Ãû³Æ
-		setVisible(true);     // 
-		
+		setResizable(false);  // å›ºå®šçª—å£å¤§å°
+		setTitle("tank war"); // è®¾ç½®æ ‡é¢˜æ åç§°
+		setVisible(true);     //
+
 		this.addKeyListener(new MyKeyListener());
-		// ÉèÖÃ¿ÉÒÔ¹Ø±Õ´°Ìå
-		addWindowListener(new WindowAdapter() {    // WindowAdapter  ¼Ì³Ğ WindowListner
+		// è®¾ç½®å¯ä»¥å…³é—­çª—ä½“
+		addWindowListener(new WindowAdapter() {    // WindowAdapter  ç»§æ‰¿ WindowListner
 			@Override
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
 		});
 	}
-	// ÏµÍ³×Ô¶¯µ÷ÓÃ£ºµ±´°¿ÚĞèÒªÖØĞÂ»æÖÆ£¨´ò¿ª´°¿Ú£¬ÒÆ¶¯´°¿Ú£¬¹Ø±Õ´°¿Ú¡£¡£¡££©
-	@Override 
+	// ç³»ç»Ÿè‡ªåŠ¨è°ƒç”¨ï¼šå½“çª—å£éœ€è¦é‡æ–°ç»˜åˆ¶ï¼ˆæ‰“å¼€çª—å£ï¼Œç§»åŠ¨çª—å£ï¼Œå…³é—­çª—å£ã€‚ã€‚ã€‚ï¼‰
+	@Override
 	public void paint(Graphics g) {
-		System.out.println("paint");
-		g.fillRect(x, y, 50, 50);
-		
-		switch(dir) {
-		case LEFT:
-			x -= SPEED;
-			break;
-		case RIGHT:
-			x += SPEED;
-			break;
-		case UP:
-			y -= SPEED;
-			break;
-		case DOWN:
-			y += SPEED;
-			break;
-			
-			
-		}
+
+		myTank.paint(g);   //Tankè‡ªå·±ç”»ï¼Œæ¯”è¾ƒåˆé€‚
+
 	}
-	
-	
+
+
 	class MyKeyListener extends KeyAdapter{
-		
+
 		boolean bL = false;
 		boolean bU = false;
 		boolean bR = false;
 		boolean bD = false;
-		
-		
-		
-		
+
 		@Override
 		public void keyPressed(KeyEvent e) {
-			int key = e.getKeyCode(); // »ñÈ¡ ¼ü µÄ´úÂë
+			int key = e.getKeyCode(); // è·å– é”® çš„ä»£ç 
 			switch(key) {
-			case KeyEvent.VK_LEFT:
-				bL = true;
-			break;
-			
-			case KeyEvent.VK_UP:
-				bU = true;
-			break;
-			
-			case KeyEvent.VK_RIGHT:
-				bR = true;
-			break;
-			
-			case KeyEvent.VK_DOWN:
-				bD = true;
-			break;
+				case KeyEvent.VK_LEFT:
+					bL = true;
+					break;
+				case KeyEvent.VK_UP:
+					bU = true;
+					break;
+				case KeyEvent.VK_RIGHT:
+					bR = true;
+					break;
+				case KeyEvent.VK_DOWN:
+					bD = true;
+					break;
 			}
-			
 			setMainTankDir();
-		
 			System.out.println("keyPressed");
-			
-		
-			repaint();       //ÖØĞÂ´¥·¢paint·½·¨
+			repaint();       //é‡æ–°è§¦å‘paintæ–¹æ³•
 		}
-		
+
+
 		@Override
 		public void keyReleased(KeyEvent e) {
 			System.out.println("keyReleased");
-			
-			setMainTankDir();
+
+			int key = e.getKeyCode(); // è·å– é”® çš„ä»£ç 
+			switch(key) {
+				case KeyEvent.VK_LEFT:
+					bL = false;
+					break;
+
+				case KeyEvent.VK_UP:
+					bU = false;
+					break;
+
+				case KeyEvent.VK_RIGHT:
+					bR = false;
+					break;
+
+				case KeyEvent.VK_DOWN:
+					bD = false;
+					break;
+			}
+//			setMainTankDir();
 		}
-		
+
 		public void setMainTankDir() {
 			// TODO Auto-generated method stub
-			if(bL) dir = Dir.LEFT;
-			if(bU) dir = Dir.UP;
-			if(bD) dir = Dir.DOWN;
-			if(bR) dir = Dir.RIGHT;
-			
+			if(bL) myTank.setDir(Dir.LEFT);
+			if(bU) myTank.setDir(Dir.UP);
+			if(bD) myTank.setDir(Dir.DOWN);
+			if(bR) myTank.setDir(Dir.RIGHT);
 		}
-		
+
 	}
 
-
-	
 }
