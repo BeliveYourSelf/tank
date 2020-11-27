@@ -14,10 +14,10 @@ public class Main {
 		// TODO Auto-generated method stub
 		TankFrame tf = new TankFrame();
 		
-		while(true) {			// 让黑块自动移动
-			Thread.sleep(50);
-			tf.repaint();
-		}
+//		while(true) {			// 让黑块自动移动
+//			Thread.sleep(50);
+//			tf.repaint();
+//		}
 	}
 
 }

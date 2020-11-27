@@ -11,6 +11,10 @@ public class TankFrame extends Frame{
 
 	int x =200 , y=200;
 	
+	Dir dir = Dir.DOWN;
+	
+	private final int SPEED = 10;
+	
 	public TankFrame() {
 		
 		setSize(800, 600);
@@ -33,7 +37,22 @@ public class TankFrame extends Frame{
 		System.out.println("paint");
 		g.fillRect(x, y, 50, 50);
 		
-		x += 10;
+		switch(dir) {
+		case LEFT:
+			x -= SPEED;
+			break;
+		case RIGHT:
+			x += SPEED;
+			break;
+		case UP:
+			y -= SPEED;
+			break;
+		case DOWN:
+			y += SPEED;
+			break;
+			
+			
+		}
 	}
 	
 	
@@ -43,6 +62,9 @@ public class TankFrame extends Frame{
 		boolean bU = false;
 		boolean bR = false;
 		boolean bD = false;
+		
+		
+		
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -65,15 +87,32 @@ public class TankFrame extends Frame{
 			break;
 			}
 			
+			setMainTankDir();
+		
 			System.out.println("keyPressed");
-			x +=200;
+			
+		
 			repaint();       //重新触发paint方法
 		}
 		
 		@Override
 		public void keyReleased(KeyEvent e) {
 			System.out.println("keyReleased");
+			
+			setMainTankDir();
+		}
+		
+		public void setMainTankDir() {
+			// TODO Auto-generated method stub
+			if(bL) dir = Dir.LEFT;
+			if(bU) dir = Dir.UP;
+			if(bD) dir = Dir.DOWN;
+			if(bR) dir = Dir.RIGHT;
+			
 		}
 		
 	}
+
+
+	
 }
