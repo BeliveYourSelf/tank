@@ -11,8 +11,10 @@ public class TankFrame extends Frame{
 
 	Tank myTank = new Tank(200,200,Dir.DOWN);
 
-	public TankFrame() {
+	Bullet bullet = new Bullet(300,300,Dir.DOWN);
 
+
+	public TankFrame() {
 		setSize(800, 600);
 		setResizable(false);  // 固定窗口大小
 		setTitle("tank war"); // 设置标题栏名称
@@ -33,7 +35,7 @@ public class TankFrame extends Frame{
 	public void paint(Graphics g) {
 
 		myTank.paint(g);   //Tank自己画，比较合适
-
+        bullet.paint(g);
 	}
 
 
