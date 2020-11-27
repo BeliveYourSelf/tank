@@ -55,6 +55,8 @@ public class Bullet {
                 break;
         }
         if(x <0 || y<0 || x>TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT) live = false;
+
+        // 当子弹击中坦克，把坦克和子弹  live = false
         if(tf.tanks.size()>0){
             List<Tank> tanks = tf.tanks;
             for(int i=0;i<tanks.size();i++){
