@@ -11,6 +11,24 @@ import java.awt.*; /**
  **/
 public class Tank {
     private int x,y;
+
+    private boolean live = true;
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     private Dir dir = Dir.DOWN;
     private final int SPEED = 5;
     public static int WIDTH =ResourceMgr.tankD.getWidth();
@@ -37,6 +55,7 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        if(!live) tf.tanks.remove(this);
         switch (dir) {
             case LEFT:
                 g.drawImage(ResourceMgr.tankL,x,y,null);
@@ -86,5 +105,9 @@ public class Tank {
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         tf.bullets.add(new Bullet(bX,bY,dir,tf));
+    }
+
+    public void die() {
+        live = false;
     }
 }
