@@ -1,8 +1,5 @@
 package com.mashibing.tank;
 
-import java.awt.Frame;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 /**
  * AWT 创建窗口
  * @author Administrator

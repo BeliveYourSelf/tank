@@ -1,7 +1,6 @@
 package com.mashibing.tank;
 
-import java.awt.Frame;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -13,9 +12,11 @@ public class TankFrame extends Frame{
 
 	Bullet bullet = new Bullet(300,300,Dir.DOWN);
 
+	static final int GAME_WIDTH =800, GAME_HEIGHT=600;
+
 
 	public TankFrame() {
-		setSize(800, 600);
+		setSize(GAME_WIDTH, GAME_HEIGHT);
 		setResizable(false);  // 固定窗口大小
 		setTitle("tank war"); // 设置标题栏名称
 		setVisible(true);     //
@@ -30,6 +31,21 @@ public class TankFrame extends Frame{
 		});
 	}
 
+    // TODO 解决屏幕闪动-双缓冲问题(加完之后，坦克和子弹变型)
+    /*Image offScreenImage = null;
+    @Override
+    public void update(Graphics g){
+        if(offScreenImage == null){
+            offScreenImage = this.createImage(GAME_WIDTH,GAME_HEIGHT);
+        }
+        Graphics goffScreen = offScreenImage.getGraphics();
+        Color c = goffScreen.getColor();
+        goffScreen.setColor(Color.BLACK);
+        goffScreen.fillRect(0,0,WIDTH,HEIGHT);
+        goffScreen.setColor(c);
+        paint(goffScreen);
+        g.drawImage(offScreenImage, 0, 0, null);
+    }*/
 	// 系统自动调用：当窗口需要重新绘制（打开窗口，移动窗口，关闭窗口。。。）
 	@Override
 	public void paint(Graphics g) {
@@ -108,5 +124,6 @@ public class TankFrame extends Frame{
 		}
 
 	}
+
 
 }
