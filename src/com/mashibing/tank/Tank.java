@@ -16,7 +16,7 @@ public class Tank {
     private int x,y;
     private boolean live = true;
     private Dir dir = Dir.DOWN;
-    private final int SPEED = 5;
+    private final int SPEED = 1;
     public static int WIDTH =ResourceMgr.tankD.getWidth();
     public static int HEIGHT =ResourceMgr.tankD.getHeight();
     private TankFrame tf;
@@ -119,7 +119,10 @@ public class Tank {
         tf.bullets.add(new Bullet(bX,bY,dir,this.group,tf));
     }
 
-    public void die() {
+    public void die(Graphics g) {
+        Tank tank= this;
         live = false;
+        Explode explode = new Explode(tank.x, tank.y, tf);
+        tf.explodes.add(explode);
     }
 }

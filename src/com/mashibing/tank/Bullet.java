@@ -78,14 +78,14 @@ public class Bullet {
         if(x <0 || y<0 || x>TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT) living = false;
     }
 
-    public void collideWith(Tank tank) {
+    public void collideWith(Tank tank,Graphics g) {
         if(this.group == tank.getGroup()) return;
 
         // TODO ： 用一个 rect 来记录子弹位置
         Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
         if (rect1.intersects(rect2)) {
-            tank.die();
+            tank.die(g);
             this.die();
 
         }

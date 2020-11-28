@@ -28,18 +28,29 @@ public class Explode {
         this.x = x;
         this.y = y;
         this.tf = tf;
-        new Audio("audio/exploed.wav");
+//        new Audio("audio/exploed.wav");
     }
     public void paint(Graphics g){
 
         g.drawImage(ResourceMgr.explodes[step++],x,y,null);
 
         if (step >= ResourceMgr.explodes.length)
-            step = 0;
+            tf.explodes.remove(this);
     }
 
+    public int getX() {
+        return x;
+    }
 
+    public void setX(int x) {
+        this.x = x;
+    }
 
+    public int getY() {
+        return y;
+    }
 
-
+    public void setY(int y) {
+        this.y = y;
+    }
 }
