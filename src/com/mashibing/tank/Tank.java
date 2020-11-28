@@ -23,6 +23,8 @@ public class Tank {
     private boolean moving = true;
     private Random random =new Random();
     private Group group = Group.BAD;
+    Rectangle rect = new Rectangle();
+
 
     public Group getGroup() {
         return group;
@@ -62,6 +64,10 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = this.WIDTH;
+        rect.height = this.HEIGHT;
     }
 
     public void paint(Graphics g) {
@@ -116,6 +122,9 @@ public class Tank {
             randomDir();
 
         boundsCheck();
+
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     private void boundsCheck() {
