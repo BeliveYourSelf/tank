@@ -84,9 +84,6 @@ public class Tank {
         move();
     }
 
-    public boolean isMoving() {
-        return moving;
-    }
 
     public void setMoving(boolean moving) {
         this.moving = moving;
@@ -110,7 +107,30 @@ public class Tank {
                 break;
         }
 
-        if (random.nextInt(10)>8) fire();
+        System.out.println(this.group.name());
+        System.out.println(Group.BAD == this.group);
+        System.out.println(Group.BAD.name());
+        if (random.nextInt(10)>8 && this.group.equals(Group.BAD)){
+            fire();
+            randomDirection();
+        }
+
+
+    }
+
+    private void randomDirection() {
+                int i = random.nextInt(3);
+                switch (i){
+                    case 0: this.dir = Dir.DOWN;
+                        break;
+                    case 1: this.dir = Dir.UP;
+                        break;
+                    case 2: this.dir = Dir.LEFT;
+                        break;
+                    case 3: this.dir = Dir.RIGHT;
+                        break;
+                        default: break;
+                }
     }
 
     public void fire() {
