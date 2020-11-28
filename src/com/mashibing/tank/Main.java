@@ -14,7 +14,7 @@ public class Main {
 		for (int i = 0; i < 5; i++) {
 			tf.tanks.add(new Tank(50 +i*60,200,Dir.DOWN,Group.BAD,tf));
 		}
-		new Thread(()->new Audio("audio/war1.wav").loop()).start();
+//		new Thread(()->new Audio("audio/war1.wav").loop()).start();
 		while(true) {			// 让黑块自动移动
 			Thread.sleep(50);
 			tf.repaint();
