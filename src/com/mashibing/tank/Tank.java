@@ -16,7 +16,7 @@ public class Tank {
     private int x,y;
     private boolean live = true;
     private Dir dir = Dir.DOWN;
-    private final int SPEED = 1;
+    private final int SPEED = 10;
     public static int WIDTH =ResourceMgr.tankD.getWidth();
     public static int HEIGHT =ResourceMgr.tankD.getHeight();
     private TankFrame tf;
@@ -91,7 +91,7 @@ public class Tank {
 
     private void move() {
         if(!moving) return;
-
+        Wall.wallCollideWith(this);
         switch(dir) {
             case LEFT:
                 x -= SPEED;
@@ -107,9 +107,7 @@ public class Tank {
                 break;
         }
 
-        System.out.println(this.group.name());
-        System.out.println(Group.BAD == this.group);
-        System.out.println(Group.BAD.name());
+
         if (random.nextInt(10)>8 && this.group.equals(Group.BAD)){
             fire();
             randomDirection();
