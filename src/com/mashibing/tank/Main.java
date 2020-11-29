@@ -11,7 +11,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		TankFrame tf = new TankFrame();
 
-		int initTankCount = Integer.parseInt((String)PropertyMgr.get("initTankCount"));
+		int initTankCount =PropertyMgr.getInteger("initTankCount"); // Object只能 先 String  后 转 Integer
 		//初始化地方坦克
 		for (int i = 0; i < initTankCount; i++) {
 			tf.tanks.add(new Tank(50 +i*60,200,Dir.DOWN,Group.BAD,tf));

@@ -16,7 +16,7 @@ public class Tank {
     private int x,y;
     private boolean live = true;
     private Dir dir = Dir.DOWN;
-    private final int SPEED = 5;
+    private final int SPEED = PropertyMgr.getInteger("tankSpeed");
     public static int WIDTH =ResourceMgr.goodTankD.getWidth();
     public static int HEIGHT =ResourceMgr.goodTankD.getHeight();
     private TankFrame tf;
