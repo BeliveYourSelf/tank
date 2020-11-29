@@ -2,6 +2,9 @@ package com.mashibing.tank;/**
  * Created by Administrator on 2020/11/27 13:40
  */
 
+import com.mashibing.tank.dp.strategy.BadTankFire;
+import com.mashibing.tank.dp.strategy.Fire;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -25,6 +28,13 @@ public class Tank {
     private Group group = Group.BAD;
     Rectangle rect = new Rectangle();
 
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public void setTf(TankFrame tf) {
+        this.tf = tf;
+    }
 
     public Group getGroup() {
         return group;
@@ -117,7 +127,7 @@ public class Tank {
         }
 
         if (this.group == Group.BAD && random.nextInt(100) > 95)
-            fire();
+            fire(new BadTankFire());
         if(this.group == Group.BAD && random.nextInt(100) > 95)
             randomDir();
 
@@ -139,10 +149,8 @@ public class Tank {
         this.dir = Dir.values()[random.nextInt(4)];
     }
 
-    public void fire() {
-        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tf.bullets.add(new Bullet(bX,bY,dir,this.group,tf));
+    public void fire(Fire fire) {
+        fire.fire(this);
     }
 
     public void die() {

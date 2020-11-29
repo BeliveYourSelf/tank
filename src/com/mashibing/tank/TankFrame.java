@@ -1,5 +1,7 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.dp.strategy.GoodTankFire;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,6 +17,14 @@ public class TankFrame extends Frame{
 	List<Bullet> bullets = new ArrayList<>();
 	List<Tank> tanks = new ArrayList<>();
 	List<Explode> explodes = new ArrayList<>();
+
+	public List<Bullet> getBullets() {
+		return bullets;
+	}
+
+	public void setBullets(List<Bullet> bullets) {
+		this.bullets = bullets;
+	}
 
 	static final int GAME_WIDTH =PropertyMgr.getInteger("gameWidth"), GAME_HEIGHT=PropertyMgr.getInteger("gameHeight");;
 
@@ -134,7 +144,7 @@ public class TankFrame extends Frame{
 					break;
 
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire();
+                    myTank.fire(new GoodTankFire());
                     break;
 			}
 			setMainTankDir();
