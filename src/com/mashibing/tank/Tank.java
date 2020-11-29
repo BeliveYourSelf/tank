@@ -2,6 +2,10 @@ package com.mashibing.tank;/**
  * Created by Administrator on 2020/11/27 13:40
  */
 
+import com.mashibing.tank.dp.strategy.DefaultFireStrategy;
+import com.mashibing.tank.dp.strategy.FireStrategy;
+import com.mashibing.tank.dp.strategy.FourFireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -13,16 +17,17 @@ import java.util.Random;
  * @return
  **/
 public class Tank {
-    private int x,y;
+    public int x,y;
     private boolean live = true;
-    private Dir dir = Dir.DOWN;
+    public Dir dir = Dir.DOWN;
     private final int SPEED = PropertyMgr.getInteger("tankSpeed");
     public static int WIDTH =ResourceMgr.goodTankD.getWidth();
     public static int HEIGHT =ResourceMgr.goodTankD.getHeight();
-    private TankFrame tf;
+    public TankFrame tf;
     private boolean moving = true;
     private Random random =new Random();
-    private Group group = Group.BAD;
+    public Group group = Group.BAD;
+    FireStrategy fs;
     Rectangle rect = new Rectangle();
 
 
@@ -68,6 +73,20 @@ public class Tank {
         rect.y = this.y;
         rect.width = this.WIDTH;
         rect.height = this.HEIGHT;
+        try {
+            if (group == Group.GOOD) {
+                String goodFsName = PropertyMgr.getString("goodFs");
+                fs = (FireStrategy) Class.forName(goodFsName).getDeclaredConstructor().newInstance(); // 可以指定构造方法
+                }
+             else{
+                String badFs = PropertyMgr.getString("badFs");
+                fs = (FireStrategy) Class.forName(badFs).getDeclaredConstructor().newInstance(); // 可以指定构造方法
+//                fs = new DefaultFireStrategy();
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void paint(Graphics g) {
@@ -117,7 +136,7 @@ public class Tank {
         }
 
         if (this.group == Group.BAD && random.nextInt(100) > 95)
-            fire();
+            fire(this.fs);
         if(this.group == Group.BAD && random.nextInt(100) > 95)
             randomDir();
 
@@ -139,10 +158,8 @@ public class Tank {
         this.dir = Dir.values()[random.nextInt(4)];
     }
 
-    public void fire() {
-        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tf.bullets.add(new Bullet(bX,bY,dir,this.group,tf));
+    public void fire(FireStrategy fireStrategy) {
+        fireStrategy.fire(this);
     }
 
     public void die() {

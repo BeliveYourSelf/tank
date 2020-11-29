@@ -4,3 +4,6 @@ tankSpeed=5
 bulletSpeed=50
 gameWidth=1080
 gameHeight=720
+#fireStrategy  全路径
+goodFs=com.mashibing.tank.dp.strategy.FourFireStrategy
+badFs=com.mashibing.tank.dp.strategy.DefaultFireStrategy

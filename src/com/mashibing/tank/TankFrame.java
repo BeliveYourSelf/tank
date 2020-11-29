@@ -134,7 +134,7 @@ public class TankFrame extends Frame{
 					break;
 
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire();
+                    myTank.fire(myTank.fs);
                     break;
 			}
 			setMainTankDir();
