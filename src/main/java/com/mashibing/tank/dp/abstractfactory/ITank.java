@@ -8,7 +8,7 @@ import java.util.Random;
 
 /**
  * Created by Administrator on 2020/11/30 21:31
- * 
+ *
  * 接口定义的值属性值为 public final static,当接口被对象赋值后，如果想使用实现类的属性值请用get 方法，  itank.x 直接调用，会调用接口public final static，不是调用实现类的属性值
  */
 public interface ITank {
