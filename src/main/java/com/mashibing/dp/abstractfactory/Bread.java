@@ -1,4 +1,4 @@
-package com.mashibing.tank.dp.abstractfactory;/**
+package com.mashibing.dp.abstractfactory;/**
  * Created by Administrator on 2020/11/29 21:51
  */
 
@@ -9,8 +9,9 @@ package com.mashibing.tank.dp.abstractfactory;/**
  * @Param
  * @return
  **/
-public class AK47 extends Weapon{
-    public void shoot() {
-        System.out.println("tutuututu......");
+public class Bread extends Food{
+    public void printName() {
+        System.out.println("bread");
     }
+
 }

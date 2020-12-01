@@ -1,27 +1,22 @@
-/*
-package com.mashibing.tank;*/
-/**
+package com.mashibing.tank.dp.abstractfactory;/**
  * Created by Administrator on 2020/11/27 13:40
- *//*
+ */
 
-
-import com.mashibing.tank.dp.strategy.DefaultFireStrategy;
+import com.mashibing.tank.*;
 import com.mashibing.tank.dp.strategy.FireStrategy;
-import com.mashibing.tank.dp.strategy.FourFireStrategy;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
-*/
 /**
  * @Author Administrator
  * @Description TODO
  * Date 2020/11/27 13:40
  * @Param
  * @return
- **//*
-
-public class Tank {
+ **/
+public class GoodTank implements ITank{
     public int x,y;
     private boolean live = true;
     public Dir dir = Dir.DOWN;
@@ -31,10 +26,25 @@ public class Tank {
     public TankFrame tf;
     private boolean moving = true;
     private Random random =new Random();
-    public Group group = Group.BAD;
-    FireStrategy fs;
+    public Group group = Group.GOOD;
+    public FireStrategy fs = null;
     Rectangle rect = new Rectangle();
 
+    public boolean isLive() {
+        return live;
+    }
+
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public FireStrategy getFs() {
+        return fs;
+    }
+
+    public Rectangle getRect() {
+        return rect;
+    }
 
     public Group getGroup() {
         return group;
@@ -67,29 +77,21 @@ public class Tank {
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir,Group group,TankFrame tf) {
+    public GoodTank(int x, int y, Dir dir, Group group, TankFrame tf) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.group = group;
+        this.group = Group.GOOD;
         this.tf = tf;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = this.WIDTH;
         rect.height = this.HEIGHT;
+        String goodFsName = PropertyMgr.getString("goodFs");
         try {
-            if (group == Group.GOOD) {
-                String goodFsName = PropertyMgr.getString("goodFs");
-                fs = (FireStrategy) Class.forName(goodFsName).getDeclaredConstructor().newInstance(); // 可以指定构造方法
-                }
-             else{
-                String badFs = PropertyMgr.getString("badFs");
-                fs = (FireStrategy) Class.forName(badFs).getDeclaredConstructor().newInstance(); // 可以指定构造方法
-//                fs = new DefaultFireStrategy();
-            }
-        }
-        catch (Exception e) {
+            fs = (FireStrategy) Class.forName(goodFsName).getDeclaredConstructor().newInstance(); // 可以指定构造方法
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -98,16 +100,16 @@ public class Tank {
         if(!live) tf.tanks.remove(this);
         switch (dir) {
             case LEFT:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL,x,y,null);
+                g.drawImage( ResourceMgr.goodTankL ,x,y,null);
                 break;
             case RIGHT:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR,x,y,null);
+                g.drawImage( ResourceMgr.goodTankR ,x,y,null);
                 break;
             case UP:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU,x,y,null);
+                g.drawImage( ResourceMgr.goodTankU ,x,y,null);
                 break;
             case DOWN:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD,x,y,null);
+                g.drawImage( ResourceMgr.goodTankD ,x,y,null);
                 break;
         }
 
@@ -122,7 +124,7 @@ public class Tank {
         this.moving = moving;
     }
 
-    private void move() {
+    public void move() {
         if(!moving) return;
 
         switch(dir) {
@@ -140,10 +142,6 @@ public class Tank {
                 break;
         }
 
-        if (this.group == Group.BAD && random.nextInt(100) > 95)
-            fire(this.fs);
-        if(this.group == Group.BAD && random.nextInt(100) > 95)
-            randomDir();
 
         boundsCheck();
 
@@ -151,15 +149,14 @@ public class Tank {
         rect.y = this.y;
     }
 
-    private void boundsCheck() {
+    public void boundsCheck() {
         if(this.x < 2) x = 2;
         if(this.y < 28) y = 28;
-        if(this.x > TankFrame.GAME_WIDTH - Tank.WIDTH -2) x = TankFrame.GAME_WIDTH - Tank.WIDTH -2;
-        if(this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT -2) y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
-
+        if(this.x > TankFrame.GAME_WIDTH - GoodTank.WIDTH -2) x = TankFrame.GAME_WIDTH - GoodTank.WIDTH -2;
+        if(this.y > TankFrame.GAME_HEIGHT - GoodTank.HEIGHT -2) y = TankFrame.GAME_HEIGHT - GoodTank.HEIGHT - 2;
     }
 
-    private void randomDir() {
+    public void randomDir() {
         this.dir = Dir.values()[random.nextInt(4)];
     }
 
@@ -171,4 +168,3 @@ public class Tank {
         live = false;
     }
 }
-*/

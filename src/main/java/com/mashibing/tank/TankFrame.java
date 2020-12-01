@@ -1,5 +1,7 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.dp.abstractfactory.*;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -10,13 +12,14 @@ import java.util.List;
 
 public class TankFrame extends Frame{
 
-	Tank myTank = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
+	//	Tank myTank = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
+	GoodTank iTank = (GoodTank) new GoodTankFactory().createTank(200, 400, Dir.DOWN, Group.GOOD, this);
 
-	List<Bullet> bullets = new ArrayList<>();
-	List<Tank> tanks = new ArrayList<>();
-	List<Explode> explodes = new ArrayList<>();
+	public List<IBullet> bullets = new ArrayList<IBullet>();
+	public List<ITank> tanks = new ArrayList<>();
+	public List<IExplode> explodes = new ArrayList<IExplode>();
 
-	static final int GAME_WIDTH =PropertyMgr.getInteger("gameWidth"), GAME_HEIGHT=PropertyMgr.getInteger("gameHeight");;
+	public static final int GAME_WIDTH =PropertyMgr.getInteger("gameWidth"), GAME_HEIGHT=PropertyMgr.getInteger("gameHeight");
 
 
 	public TankFrame() {
@@ -60,7 +63,7 @@ public class TankFrame extends Frame{
 		g.drawString("坦克数量:" + tanks.size(),10,80);
 		g.drawString("爆炸数量:" + explodes.size(),10,100);
 		g.setColor(c);
-		myTank.paint(g);   //Tank自己画，比较合适
+		iTank.paint(g);   //Tank自己画，比较合适
 
         for (int i=0;i<bullets.size();i++) {
             bullets.get(i).paint(g);
@@ -134,7 +137,7 @@ public class TankFrame extends Frame{
 					break;
 
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire(myTank.fs);
+					iTank.fire(iTank.fs);
                     break;
 			}
 			setMainTankDir();
@@ -142,14 +145,14 @@ public class TankFrame extends Frame{
 
 		public void setMainTankDir() {
 
-			if(!bL && !bU && !bD && !bR) myTank.setMoving(false);
+			if(!bL && !bU && !bD && !bR) iTank.setMoving(false);
 			else {
-				myTank.setMoving(true);
+				iTank.setMoving(true);
 			}
-			if(bL) myTank.setDir(Dir.LEFT);
-			if(bU) myTank.setDir(Dir.UP);
-			if(bD) myTank.setDir(Dir.DOWN);
-			if(bR) myTank.setDir(Dir.RIGHT);
+			if(bL) iTank.setDir(Dir.LEFT);
+			if(bU) iTank.setDir(Dir.UP);
+			if(bD) iTank.setDir(Dir.DOWN);
+			if(bR) iTank.setDir(Dir.RIGHT);
 
 		}
 

@@ -1,21 +1,21 @@
-/*
-package com.mashibing.tank;
-*
+package com.mashibing.tank.dp.abstractfactory;/**
  * Created by Administrator on 2020/11/27 14:33
+ */
 
-
+import com.mashibing.tank.Audio;
+import com.mashibing.tank.ResourceMgr;
+import com.mashibing.tank.TankFrame;
 
 import java.awt.*;
 
-*
+/**
  * @Author Administrator
  * @Description TODO
  * Date 2020/11/27 14:33
  * @Param
  * @return
- *
-
-public class Explode {
+ **/
+public class GoodExplode implements IExplode{
 
     private static final int SPEED = 10;
     public static int WIDTH =ResourceMgr.explodes[0].getWidth();
@@ -27,11 +27,15 @@ public class Explode {
 
 
 
-    public Explode(int x, int y, TankFrame tf) {
+    public GoodExplode(int x, int y, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.tf = tf;
-        new Thread(()->new Audio("audio/explode.wav").play()).start();
+        new Thread(new Runnable() {
+            public void run() {
+                new Audio("audio/explode.wav").play();
+            }
+        }).start();
     }
     public void paint(Graphics g){
 
@@ -47,4 +51,3 @@ public class Explode {
 
 
 }
-*/

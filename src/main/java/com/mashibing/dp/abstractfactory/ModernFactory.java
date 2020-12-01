@@ -1,4 +1,4 @@
-package com.mashibing.tank.dp.abstractfactory;/**
+package com.mashibing.dp.abstractfactory;/**
  * Created by Administrator on 2020/11/29 22:19
  */
 
@@ -9,20 +9,20 @@ package com.mashibing.tank.dp.abstractfactory;/**
  * @Param
  * @return
  **/
-public class MagicFactory extends AbstarctFactory {
+public class ModernFactory extends AbstarctFactory {
 
     @Override
     Food createFood() {
-        return new MushRoom();
+        return new Bread();
     }
 
     @Override
     Vehicle createVhicle() {
-        return new Broom();
+        return new Car();
     }
 
     @Override
     Weapon createWeapon() {
-        return new MagicStick();
+        return new AK47();
     }
 }

@@ -1,4 +1,4 @@
-package com.mashibing.tank.dp.abstractfactory;/**
+package com.mashibing.dp.abstractfactory;/**
  * Created by Administrator on 2020/11/29 22:13
  */
 
@@ -6,11 +6,10 @@ package com.mashibing.tank.dp.abstractfactory;/**
  * @Author Administrator
  * @Description TODO
  * Date 2020/11/29 22:13
- * 接口：名词
- * 抽象类：形容词
  * @Param
  * @return
  **/
-public abstract class Vehicle {
-    abstract void go();
+public abstract class Weapon {
+    abstract void shoot();
+
 }
