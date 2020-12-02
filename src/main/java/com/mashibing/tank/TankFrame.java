@@ -1,5 +1,7 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.dp.abstractfactory.*;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -12,11 +14,12 @@ public class TankFrame extends Frame{
 
 	Tank myTank = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
 
-	List<Bullet> bullets = new ArrayList<>();
-	List<Tank> tanks = new ArrayList<>();
-	List<Explode> explodes = new ArrayList<>();
+	public List<BaseBullet> bullets = new ArrayList<>();
+	public List<BaseTank> tanks = new ArrayList<>();
+	public List<BaseExplode> explodes = new ArrayList<>();
 
-	static final int GAME_WIDTH =PropertyMgr.getInteger("gameWidth"), GAME_HEIGHT=PropertyMgr.getInteger("gameHeight");;
+	public GameFactory gf = new DefaultFactory();
+	public static final int GAME_WIDTH =PropertyMgr.getInteger("gameWidth"), GAME_HEIGHT=PropertyMgr.getInteger("gameHeight");;
 
 
 	public TankFrame() {
@@ -134,7 +137,7 @@ public class TankFrame extends Frame{
 					break;
 
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire(myTank.fs);
+                    myTank.fire();
                     break;
 			}
 			setMainTankDir();

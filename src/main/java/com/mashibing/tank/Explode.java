@@ -2,6 +2,8 @@ package com.mashibing.tank;/**
  * Created by Administrator on 2020/11/27 14:33
  */
 
+import com.mashibing.tank.dp.abstractfactory.BaseExplode;
+
 import java.awt.*;
 
 /**
@@ -11,7 +13,7 @@ import java.awt.*;
  * @Param
  * @return
  **/
-public class Explode {
+public class Explode extends BaseExplode {
 
     private static final int SPEED = 10;
     public static int WIDTH =ResourceMgr.explodes[0].getWidth();
@@ -29,6 +31,8 @@ public class Explode {
         this.tf = tf;
         new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
+
+    @Override
     public void paint(Graphics g){
 
         g.drawImage(ResourceMgr.explodes[step++],x,y,null);

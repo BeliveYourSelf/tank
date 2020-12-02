@@ -1,7 +1,6 @@
-package com.mashibing.tank.dp.abstractfactory;/**
+package com.mashibing.dp.factorymethod;/**
  * Created by Administrator on 2020/11/29 21:30
  */
-
 
 /**
  * @Author Administrator
@@ -10,7 +9,7 @@ package com.mashibing.tank.dp.abstractfactory;/**
  * @Param
  * @return
  **/
-public class Car extends Vehicle{
+public class Car implements Moveable{
 
     public void go() {
         System.out.println("Car go wuwuwuwu...");

@@ -1,9 +1,6 @@
-package com.mashibing.tank.dp.abstractfactory;/**
+package com.mashibing.dp.abstractfactory;/**
  * Created by Administrator on 2020/11/29 21:31
  */
-
-import com.mashibing.tank.dp.factorymethod.CarFactory;
-import com.mashibing.tank.dp.factorymethod.Moveable;
 
 /**
  * @Author Administrator

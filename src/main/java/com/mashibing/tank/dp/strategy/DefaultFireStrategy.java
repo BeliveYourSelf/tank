@@ -4,6 +4,7 @@ package com.mashibing.tank.dp.strategy;/**
 
 import com.mashibing.tank.Bullet;
 import com.mashibing.tank.Tank;
+import com.mashibing.tank.dp.abstractfactory.BaseTank;
 
 /**
  * @Author Administrator

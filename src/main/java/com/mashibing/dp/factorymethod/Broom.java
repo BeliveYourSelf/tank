@@ -1,4 +1,4 @@
-package com.mashibing.tank.dp.factorymethod;/**
+package com.mashibing.dp.factorymethod;/**
  * Created by Administrator on 2020/11/29 21:34
  */
 

@@ -1,4 +1,4 @@
-package com.mashibing.tank.dp.abstractfactory;/**
+package com.mashibing.dp.abstractfactory;/**
  * Created by Administrator on 2020/11/29 22:01
  */
 
