@@ -2,7 +2,10 @@ package com.mashibing.tank;/**
  * Created by Administrator on 2020/11/27 14:33
  */
 
+import com.mashibing.tank.dp.facade.GameObject;
+
 import java.awt.*;
+import java.util.List;
 
 /**
  * @Author Administrator
@@ -11,7 +14,7 @@ import java.awt.*;
  * @Param
  * @return
  **/
-public class Bullet {
+public class Bullet implements GameObject {
 
     private static final int SPEED = PropertyMgr.getInteger("bulletSpeed");
     public static int WIDTH =ResourceMgr.bulletD.getWidth();
@@ -42,11 +45,11 @@ public class Bullet {
         rect.y = this.y;
         rect.width = this.WIDTH;
         rect.height = this.HEIGHT;
-        tf.bullets.add(this);
+        tf.getGameObjects().add(this);
     }
     public void paint(Graphics g){
         if (!living) {
-            tf.bullets.remove(this);
+            tf.getGameObjects().remove(this);
         }
 
         switch (dir) {
@@ -66,6 +69,12 @@ public class Bullet {
 
         move();
     }
+
+    @Override
+    public void collideWith(List<GameObject> gameObjects,GameObject gameObject) {
+        tf.collideWith(gameObjects,gameObject);
+    }
+
 
     private void move() {
         switch(dir) {
@@ -87,20 +96,19 @@ public class Bullet {
         if(x <0 || y<0 || x>TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT) living = false;
     }
 
-    public void collideWith(Tank tank) {
-        if(this.group == tank.getGroup()) return;
 
-        // TODO ： 用一个 rect 来记录子弹位置
-        if (this.rect.intersects(tank.rect)) {
-            tank.die();
-            this.die();
-            int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
-            int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tf.explodes.add(new Explode(eX,eY,tf));
-        }
+
+    public void die() {
+        living = false;
     }
 
-    private void die() {
-        living = false;
+    @Override
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    @Override
+    public int getSize() {
+        return 0;
     }
 }

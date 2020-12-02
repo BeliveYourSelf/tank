@@ -2,11 +2,13 @@ package com.mashibing.tank;/**
  * Created by Administrator on 2020/11/27 13:40
  */
 
+import com.mashibing.tank.dp.facade.GameObject;
 import com.mashibing.tank.dp.strategy.DefaultFireStrategy;
 import com.mashibing.tank.dp.strategy.FireStrategy;
 import com.mashibing.tank.dp.strategy.FourFireStrategy;
 
 import java.awt.*;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -16,7 +18,7 @@ import java.util.Random;
  * @Param
  * @return
  **/
-public class Tank {
+public class Tank  implements GameObject {
     public int x,y;
     private boolean live = true;
     public Dir dir = Dir.DOWN;
@@ -27,7 +29,7 @@ public class Tank {
     private boolean moving = true;
     private Random random =new Random();
     public Group group = Group.BAD;
-    FireStrategy fs;
+    public FireStrategy fs;
     Rectangle rect = new Rectangle();
 
 
@@ -90,7 +92,7 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        if(!live) tf.tanks.remove(this);
+        if(!live) tf.getGameObjects().remove(this);
         switch (dir) {
             case LEFT:
                 g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL,x,y,null);
@@ -108,6 +110,12 @@ public class Tank {
 
         move();
     }
+
+    @Override
+    public void collideWith(List<GameObject> gameObjects,GameObject gameObject) {
+        tf.collideWith(gameObjects,gameObject);
+    }
+
 
     public boolean isMoving() {
         return moving;
@@ -164,5 +172,15 @@ public class Tank {
 
     public void die() {
         live = false;
+    }
+
+    @Override
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    @Override
+    public int getSize() {
+        return 0;
     }
 }
