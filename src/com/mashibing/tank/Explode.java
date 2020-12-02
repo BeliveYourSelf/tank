@@ -2,6 +2,8 @@ package com.mashibing.tank;/**
  * Created by Administrator on 2020/11/27 14:33
  */
 
+import com.mashibing.tank.dp.facade.GameModel;
+
 import java.awt.*;
 
 /**
@@ -17,16 +19,16 @@ public class Explode {
     public static int WIDTH =ResourceMgr.explodes[0].getWidth();
     public static int HEIGHT =ResourceMgr.explodes[0].getHeight();
     private int x,y;
-    private TankFrame tf;
+    private GameModel gm;
     private int step = 0;
 
 
 
 
-    public Explode(int x, int y, TankFrame tf) {
+    public Explode(int x, int y,GameModel gm) {
         this.x = x;
         this.y = y;
-        this.tf = tf;
+        this.gm = gm;
         new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
     public void paint(Graphics g){
@@ -35,7 +37,7 @@ public class Explode {
 
         if (step >= ResourceMgr.explodes.length)  {
             step = 0;
-            tf.explodes.remove(this);}
+            gm.explodes.remove(this);}
     }
 
 

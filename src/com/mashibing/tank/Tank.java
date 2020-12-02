@@ -2,6 +2,7 @@ package com.mashibing.tank;/**
  * Created by Administrator on 2020/11/27 13:40
  */
 
+import com.mashibing.tank.dp.facade.GameModel;
 import com.mashibing.tank.dp.strategy.DefaultFireStrategy;
 import com.mashibing.tank.dp.strategy.FireStrategy;
 import com.mashibing.tank.dp.strategy.FourFireStrategy;
@@ -23,12 +24,12 @@ public class Tank {
     private final int SPEED = PropertyMgr.getInteger("tankSpeed");
     public static int WIDTH =ResourceMgr.goodTankD.getWidth();
     public static int HEIGHT =ResourceMgr.goodTankD.getHeight();
-    public TankFrame tf;
     private boolean moving = true;
     private Random random =new Random();
     public Group group = Group.BAD;
     FireStrategy fs;
     Rectangle rect = new Rectangle();
+    public GameModel gm;
 
 
     public Group getGroup() {
@@ -62,17 +63,17 @@ public class Tank {
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir,Group group,TankFrame tf) {
+    public Tank(int x, int y, Dir dir,Group group,GameModel gameModel) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = this.WIDTH;
         rect.height = this.HEIGHT;
+        gm = gameModel;
         try {
             if (group == Group.GOOD) {
                 String goodFsName = PropertyMgr.getString("goodFs");
@@ -90,7 +91,7 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        if(!live) tf.tanks.remove(this);
+        if(!live) gm.tanks.remove(this);
         switch (dir) {
             case LEFT:
                 g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL,x,y,null);

@@ -1,5 +1,8 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.dp.facade.GameModel;
+import com.mashibing.tank.dp.strategy.FourFireStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -9,12 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankFrame extends Frame{
+	GameModel gm = new GameModel();
 
-	Tank myTank = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
-
-	List<Bullet> bullets = new ArrayList<>();
-	List<Tank> tanks = new ArrayList<>();
-	List<Explode> explodes = new ArrayList<>();
 
 	static final int GAME_WIDTH =PropertyMgr.getInteger("gameWidth"), GAME_HEIGHT=PropertyMgr.getInteger("gameHeight");;
 
@@ -53,31 +52,7 @@ public class TankFrame extends Frame{
 	// 系统自动调用：当窗口需要重新绘制（打开窗口，移动窗口，关闭窗口。。。）
 	@Override
 	public void paint(Graphics g) {
-
-		Color c = g.getColor();
-		g.setColor(Color.WHITE);
-		g.drawString("子弹数量:" + bullets.size(),10,60);
-		g.drawString("坦克数量:" + tanks.size(),10,80);
-		g.drawString("爆炸数量:" + explodes.size(),10,100);
-		g.setColor(c);
-		myTank.paint(g);   //Tank自己画，比较合适
-
-        for (int i=0;i<bullets.size();i++) {
-            bullets.get(i).paint(g);
-        }
-		for (int i = 0; i <tanks.size() ; i++) {
-			tanks.get(i).paint(g);
-		}
-
-		for (int i = 0; i <explodes.size() ; i++) {
-			explodes.get(i).paint(g);
-		}
-
-		for (int i = 0; i < bullets.size(); i++) {
-			for (int j = 0; j < tanks.size(); j++) {
-			bullets.get(i).collideWith(tanks.get(j));
-			}
-		}
+		gm.paint(g);
 	}
 
 
@@ -134,14 +109,14 @@ public class TankFrame extends Frame{
 					break;
 
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire(myTank.fs);
+                    gm.getMainTank().fire(new FourFireStrategy());
                     break;
 			}
 			setMainTankDir();
 		}
 
 		public void setMainTankDir() {
-
+			Tank myTank = gm.getMainTank();
 			if(!bL && !bU && !bD && !bR) myTank.setMoving(false);
 			else {
 				myTank.setMoving(true);
