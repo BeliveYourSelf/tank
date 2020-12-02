@@ -17,6 +17,6 @@ public class DefaultFireStrategy implements FireStrategy{
         BadTank badTank = (BadTank) t;
         int bX = badTank.x + ITank.WIDTH/2 - IBullet.WIDTH/2;
         int bY = badTank.y + ITank.HEIGHT/2 - IBullet.HEIGHT/2;
-        new BadTankFactory().createBullet(bX,bY,t.dir,badTank.group,badTank.tf);
+        new BadTankFactory().createBullet(bX,bY,badTank.getDir(),badTank.group,badTank.tf);
     }
 }

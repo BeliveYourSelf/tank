@@ -13,7 +13,7 @@ import java.util.List;
 public class TankFrame extends Frame{
 
 	//	Tank myTank = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
-	GoodTank iTank = (GoodTank) new GoodTankFactory().createTank(200, 400, Dir.DOWN, Group.GOOD, this);
+	ITank iTank = new GoodTankFactory().createTank(200, 400, Dir.DOWN, Group.GOOD, this);
 
 	public List<IBullet> bullets = new ArrayList<IBullet>();
 	public List<ITank> tanks = new ArrayList<>();
@@ -137,7 +137,7 @@ public class TankFrame extends Frame{
 					break;
 
                 case KeyEvent.VK_CONTROL:
-					iTank.fire(iTank.fs);
+					iTank.fire(iTank.getFs());
                     break;
 			}
 			setMainTankDir();

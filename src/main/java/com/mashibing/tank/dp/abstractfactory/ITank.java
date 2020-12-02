@@ -1,6 +1,7 @@
 package com.mashibing.tank.dp.abstractfactory;
 
 import com.mashibing.tank.*;
+import com.mashibing.tank.dp.strategy.DefaultFireStrategy;
 import com.mashibing.tank.dp.strategy.FireStrategy;
 
 import java.awt.*;
@@ -38,5 +39,6 @@ public interface ITank {
     public TankFrame getTf();
     public FireStrategy getFs();
     public Rectangle getRect();
+
 
 }
