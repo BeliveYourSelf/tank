@@ -3,6 +3,7 @@ package com.mashibing.tank;/**
  */
 
 import com.mashibing.tank.dp.facade.GameModel;
+import com.mashibing.tank.dp.mediator.GameObject;
 import com.mashibing.tank.dp.strategy.DefaultFireStrategy;
 import com.mashibing.tank.dp.strategy.FireStrategy;
 import com.mashibing.tank.dp.strategy.FourFireStrategy;
@@ -17,7 +18,7 @@ import java.util.Random;
  * @Param
  * @return
  **/
-public class Tank {
+public class Tank extends GameObject{
     public int x,y;
     private boolean live = true;
     public Dir dir = Dir.DOWN;
@@ -28,9 +29,13 @@ public class Tank {
     private Random random =new Random();
     public Group group = Group.BAD;
     FireStrategy fs;
+    public int oldX,oldY;
     Rectangle rect = new Rectangle();
     public GameModel gm;
 
+    public Rectangle getRect() {
+        return rect;
+    }
 
     public Group getGroup() {
         return group;
@@ -91,7 +96,7 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        if(!live) gm.tanks.remove(this);
+        if(!live) gm.remove(this);
         switch (dir) {
             case LEFT:
                 g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL,x,y,null);
@@ -119,6 +124,8 @@ public class Tank {
     }
 
     private void move() {
+        oldX = x;
+        oldY = y;
         if(!moving) return;
 
         switch(dir) {
@@ -165,5 +172,15 @@ public class Tank {
 
     public void die() {
         live = false;
+    }
+
+    public void stop() {
+        moving = false;
+    }
+    //  回到碰撞的上一次位置
+
+    public void preLocation(){
+        x = oldX;
+        y = oldY;
     }
 }

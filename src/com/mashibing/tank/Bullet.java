@@ -3,6 +3,7 @@ package com.mashibing.tank;/**
  */
 
 import com.mashibing.tank.dp.facade.GameModel;
+import com.mashibing.tank.dp.mediator.GameObject;
 
 import java.awt.*;
 
@@ -13,7 +14,7 @@ import java.awt.*;
  * @Param
  * @return
  **/
-public class Bullet {
+public class Bullet extends GameObject {
 
     private static final int SPEED = PropertyMgr.getInteger("bulletSpeed");
     public static int WIDTH =ResourceMgr.bulletD.getWidth();
@@ -44,11 +45,11 @@ public class Bullet {
         rect.y = this.y;
         rect.width = this.WIDTH;
         rect.height = this.HEIGHT;
-        gm.bullets.add(this);
+        gm.add(this);
     }
     public void paint(Graphics g){
         if (!living) {
-            gm.bullets.remove(this);
+            gm.remove(this);
         }
 
         switch (dir) {
@@ -89,8 +90,8 @@ public class Bullet {
         if(x <0 || y<0 || x>TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT) living = false;
     }
 
-    public void collideWith(Tank tank) {
-        if(this.group == tank.getGroup()) return;
+    public boolean collideWith(Tank tank) {
+        if(this.group == tank.getGroup()) return false;
 
         // TODO ： 用一个 rect 来记录子弹位置
         if (this.rect.intersects(tank.rect)) {
@@ -98,8 +99,10 @@ public class Bullet {
             this.die();
             int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
             int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            gm.explodes.add(new Explode(eX,eY,gm));
+            gm.add(new Explode(eX,eY,gm));
+            return true;
         }
+        return false;
     }
 
     private void die() {

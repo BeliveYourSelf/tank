@@ -7,3 +7,5 @@ gameHeight=720
 #fireStrategy  全路径
 goodFs=com.mashibing.tank.dp.strategy.FourFireStrategy
 badFs=com.mashibing.tank.dp.strategy.DefaultFireStrategy
+#colliders
+colliders=com.mashibing.tank.cor.BulletTankCollider,com.mashibing.tank.cor.TankTankCollider

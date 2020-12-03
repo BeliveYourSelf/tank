@@ -3,6 +3,7 @@ package com.mashibing.tank;/**
  */
 
 import com.mashibing.tank.dp.facade.GameModel;
+import com.mashibing.tank.dp.mediator.GameObject;
 
 import java.awt.*;
 
@@ -13,7 +14,7 @@ import java.awt.*;
  * @Param
  * @return
  **/
-public class Explode {
+public class Explode extends GameObject {
 
     private static final int SPEED = 10;
     public static int WIDTH =ResourceMgr.explodes[0].getWidth();
@@ -37,7 +38,7 @@ public class Explode {
 
         if (step >= ResourceMgr.explodes.length)  {
             step = 0;
-            gm.explodes.remove(this);}
+            gm.remove(this);}
     }
 
 
