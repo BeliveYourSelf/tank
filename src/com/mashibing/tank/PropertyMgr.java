@@ -5,6 +5,8 @@ package com.mashibing.tank;/**
 import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -36,6 +38,12 @@ public class PropertyMgr {
     public static Integer getInteger(String key) {
         if(props == null) return null;
         return Integer.parseInt((String)props.get(key));
+    }
+    public static List<String> getList(String key) {
+        if(props == null) return null;
+        String s = (String) props.get(key);
+        String[] split = s.split(",", 0);
+        return Arrays.asList(split);
     }
 
     public static void main(String[] args) {
