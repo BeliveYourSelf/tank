@@ -1,6 +1,7 @@
 package com.mashibing.tank;
 
 import com.mashibing.tank.dp.facade.GameModel;
+import com.mashibing.tank.dp.mediator.GameObject;
 import com.mashibing.tank.dp.strategy.FourFireStrategy;
 
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class TankFrame extends Frame{
 	GameModel gm = new GameModel();
-
+	GameObject wall = new Wall(gm);
 
 	static final int GAME_WIDTH =PropertyMgr.getInteger("gameWidth"), GAME_HEIGHT=PropertyMgr.getInteger("gameHeight");;
 

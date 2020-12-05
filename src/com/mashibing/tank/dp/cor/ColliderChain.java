@@ -31,6 +31,8 @@ public class ColliderChain implements Collider{
                 }
                  else if (collider instanceof TankTankCollider) {
                     add((TankTankCollider) collider);
+                }else if (collider instanceof TankWallCollider) {
+                    add((TankWallCollider) collider);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
