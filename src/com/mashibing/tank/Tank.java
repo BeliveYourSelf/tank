@@ -17,7 +17,7 @@ import java.util.Random;
  * @return
  **/
 public class Tank extends GameObject{
-    public int x,y;
+
     private boolean live = true;
     public Dir dir = Dir.DOWN;
     private final int SPEED = PropertyMgr.getInteger("tankSpeed");
@@ -180,5 +180,15 @@ public class Tank extends GameObject{
     public void back(){
         x = oldX;
         y = oldY;
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 }

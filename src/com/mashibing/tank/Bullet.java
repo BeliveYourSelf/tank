@@ -19,7 +19,7 @@ public class Bullet extends GameObject {
     private static final int SPEED = PropertyMgr.getInteger("bulletSpeed");
     public static int WIDTH =ResourceMgr.bulletD.getWidth();
     public static int HEIGHT =ResourceMgr.bulletD.getHeight();
-    private int x,y;
+
     private Dir dir;
     private boolean living = true;
     private Group group = Group.BAD;
@@ -66,6 +66,16 @@ public class Bullet extends GameObject {
         }
 
         move();
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
     private void move() {
