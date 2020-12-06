@@ -108,7 +108,8 @@ public class TankFrame extends Frame{
 					break;
 
                 case KeyEvent.VK_CONTROL:
-                    GameModel.getInstance().getMainTank().fire(new FourFireStrategy());
+//                    GameModel.getInstance().getMainTank().fire(new FourFireStrategy());
+					GameModel.getInstance().getMainTank().handleFireKey();
                     break;
 			}
 			setMainTankDir();
