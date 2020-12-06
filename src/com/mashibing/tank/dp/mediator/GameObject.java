@@ -12,7 +12,7 @@ import java.awt.*;
  * @return
  **/
 public abstract class GameObject {
-    int x,y;
+    public int x,y;
 
     public abstract void paint(Graphics g);
 

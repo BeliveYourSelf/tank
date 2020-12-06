@@ -4,9 +4,7 @@ package com.mashibing.tank;/**
 
 import com.mashibing.tank.dp.facade.GameModel;
 import com.mashibing.tank.dp.mediator.GameObject;
-import com.mashibing.tank.dp.strategy.DefaultFireStrategy;
 import com.mashibing.tank.dp.strategy.FireStrategy;
-import com.mashibing.tank.dp.strategy.FourFireStrategy;
 
 import java.awt.*;
 import java.util.Random;
@@ -31,7 +29,7 @@ public class Tank extends GameObject{
     FireStrategy fs;
     public int oldX,oldY;
     Rectangle rect = new Rectangle();
-    public GameModel gm;
+
 
     public Rectangle getRect() {
         return rect;
@@ -68,7 +66,7 @@ public class Tank extends GameObject{
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir,Group group,GameModel gameModel) {
+    public Tank(int x, int y, Dir dir,Group group) {
         super();
         this.x = x;
         this.y = y;
@@ -78,7 +76,6 @@ public class Tank extends GameObject{
         rect.y = this.y;
         rect.width = this.WIDTH;
         rect.height = this.HEIGHT;
-        gm = gameModel;
         try {
             if (group == Group.GOOD) {
                 String goodFsName = PropertyMgr.getString("goodFs");
@@ -89,6 +86,7 @@ public class Tank extends GameObject{
                 fs = (FireStrategy) Class.forName(badFs).getDeclaredConstructor().newInstance(); // 可以指定构造方法
 //                fs = new DefaultFireStrategy();
             }
+            GameModel.getInstance().add(this);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -96,7 +94,7 @@ public class Tank extends GameObject{
     }
 
     public void paint(Graphics g) {
-        if(!live) gm.remove(this);
+        if(!live) GameModel.getInstance().remove(this);
         switch (dir) {
             case LEFT:
                 g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL,x,y,null);
@@ -179,7 +177,7 @@ public class Tank extends GameObject{
     }
     //  回到碰撞的上一次位置
 
-    public void preLocation(){
+    public void back(){
         x = oldX;
         y = oldY;
     }

@@ -10,6 +10,7 @@ import com.mashibing.tank.dp.cor.TankTankCollider;
 import com.mashibing.tank.dp.mediator.GameObject;
 
 import java.awt.*;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,11 @@ import java.util.List;
  * @return
  **/
 public class GameModel {
-
-    Tank myTank = new Tank(200,400, Dir.DOWN, Group.GOOD,this);
+    private static final GameModel INSTANCE= new GameModel();
+    static{
+        INSTANCE.init();
+    }
+    Tank myTank;
 //    public java.util.List<Bullet> bullets = new ArrayList<>();
 //    public java.util.List<Tank> tanks = new ArrayList<>();
 //    public List<Explode> explodes = new ArrayList<>();
@@ -34,13 +38,25 @@ public class GameModel {
     ColliderChain colliderChain = new ColliderChain();
     List<GameObject> objects = new ArrayList<>();
 
-    public GameModel(){
-        int initTankCount =PropertyMgr.getInteger("initTankCount"); // Object只能 先 String  后 转 Integer
-        //初始化地方坦克
-        for (int i = 0; i < initTankCount; i++) {
-            objects.add(new Tank(50 +i*60,200,Dir.DOWN,Group.BAD,this));
-        }
+    public static GameModel getInstance(){
+        return INSTANCE;
     }
+    private GameModel(){
+        //初始化地方坦克
+
+    }
+    private void init(){
+        myTank= new Tank(200,400, Dir.DOWN, Group.GOOD);
+        int initTankCount =PropertyMgr.getInteger("initTankCount"); // Object只能 先 String  后 转 Integer
+        for (int i = 0; i < initTankCount; i++) {
+            new Tank(50 +i*60,200,Dir.DOWN,Group.BAD);
+        }
+        add(new Wall(150,150,200,50));
+        add(new Wall(550,150,200,50));
+        add(new Wall(300,300,50,200));
+        add(new Wall(550,300,50,200));
+    }
+
 
     public void add(GameObject gameObject) {
         this.objects.add(gameObject);

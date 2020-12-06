@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankFrame extends Frame{
-	GameModel gm = new GameModel();
 
 
 	static final int GAME_WIDTH =PropertyMgr.getInteger("gameWidth"), GAME_HEIGHT=PropertyMgr.getInteger("gameHeight");;
@@ -52,7 +51,7 @@ public class TankFrame extends Frame{
 	// 系统自动调用：当窗口需要重新绘制（打开窗口，移动窗口，关闭窗口。。。）
 	@Override
 	public void paint(Graphics g) {
-		gm.paint(g);
+		GameModel.getInstance().paint(g);
 	}
 
 
@@ -109,14 +108,14 @@ public class TankFrame extends Frame{
 					break;
 
                 case KeyEvent.VK_CONTROL:
-                    gm.getMainTank().fire(new FourFireStrategy());
+                    GameModel.getInstance().getMainTank().fire(new FourFireStrategy());
                     break;
 			}
 			setMainTankDir();
 		}
 
 		public void setMainTankDir() {
-			Tank myTank = gm.getMainTank();
+			Tank myTank = GameModel.getInstance().getMainTank();
 			if(!bL && !bU && !bD && !bR) myTank.setMoving(false);
 			else {
 				myTank.setMoving(true);
