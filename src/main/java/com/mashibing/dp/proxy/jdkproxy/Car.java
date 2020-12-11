@@ -1,4 +1,4 @@
-package com.mashibing.dp.proxy;/**
+package com.mashibing.dp.proxy.jdkproxy;/**
  * Created by Administrator on 2020/12/9 20:20
  */
 
@@ -13,7 +13,7 @@ import static java.lang.Thread.sleep;
  * @Param
  * @return
  **/
-public class Car implements Movable{
+public final class Car implements Movable{
 
     @Override
     public void move() {

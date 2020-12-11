@@ -13,5 +13,5 @@ import com.mashibing.tank.dp.mediator.GameObject;
  * @return
  **/
 public interface Collider {
-    boolean collide(GameObject o1,GameObject o2);
+    boolean collide(GameObject o1, GameObject o2);
 }
