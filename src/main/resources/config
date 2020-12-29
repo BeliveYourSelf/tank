@@ -1,0 +1,11 @@
+#tanks count at initialization
+initTankCount=10
+tankSpeed=5
+bulletSpeed=50
+gameWidth=1080
+gameHeight=720
+#fireStrategy  全路径
+goodFs=com.mashibing.tank.dp.strategy.FourFireStrategy
+badFs=com.mashibing.tank.dp.strategy.DefaultFireStrategy
+#colliders
+colliders=com.mashibing.tank.cor.BulletTankCollider,com.mashibing.tank.cor.TankTankCollider
