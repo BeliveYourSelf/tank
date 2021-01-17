@@ -2,6 +2,8 @@ package com.mashibing.tank.dp.observer;/**
  * Created by Administrator on 2020/12/6 22:16
  */
 
+import java.io.Serializable;
+
 /**
  * @Author Administrator
  * @Description TODO
@@ -9,7 +11,7 @@ package com.mashibing.tank.dp.observer;/**
  * @Param
  * @return
  **/
-public interface TankFireObserver {
+public interface TankFireObserver extends Serializable {
 
     public void actionOnFire(TankFireEvent event);
 }

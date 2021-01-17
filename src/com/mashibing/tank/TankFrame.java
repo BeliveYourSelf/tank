@@ -8,12 +8,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TankFrame extends Frame{
+public class TankFrame extends Frame implements Serializable {
 
-
+	GameModel gm = GameModel.getInstance();
 	static final int GAME_WIDTH =PropertyMgr.getInteger("gameWidth"), GAME_HEIGHT=PropertyMgr.getInteger("gameHeight");;
 
 
@@ -77,6 +78,12 @@ public class TankFrame extends Frame{
 					break;
 				case KeyEvent.VK_DOWN:
 					bD = true;
+					break;
+				case KeyEvent.VK_S:
+					gm.save();
+					break;
+				case KeyEvent.VK_L:
+					gm.load();
 					break;
 			}
 			setMainTankDir();

@@ -10,6 +10,7 @@ import com.mashibing.tank.dp.cor.TankTankCollider;
 import com.mashibing.tank.dp.mediator.GameObject;
 
 import java.awt.*;
+import java.io.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
  * @Param
  * @return
  **/
-public class GameModel {
+public class GameModel implements Serializable{
     private static final GameModel INSTANCE= new GameModel();
     static{
         INSTANCE.init();
@@ -93,5 +94,46 @@ public class GameModel {
 
     public Tank getMainTank() {
         return myTank;
+    }
+
+    public void save()  {
+        ObjectOutputStream oos = null;
+        File f = new File("/Users/liwenxuan/Desktop/tank.data");
+        try{
+            oos = new ObjectOutputStream(new FileOutputStream(f));
+            oos.writeObject(myTank);
+            oos.writeObject(objects);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if(oos !=null){
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public void load() {
+        ObjectInputStream ois = null;
+        File f = new File("/Users/liwenxuan/Desktop/tank.data");
+        try{
+            ois = new ObjectInputStream(new FileInputStream(f));
+            myTank = (Tank)ois.readObject();
+            objects = (List)ois.readObject();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if(ois !=null){
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

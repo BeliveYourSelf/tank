@@ -3,6 +3,7 @@ package com.mashibing.tank.dp.mediator;/**
  */
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * @Author Administrator
@@ -11,7 +12,7 @@ import java.awt.*;
  * @Param
  * @return
  **/
-public abstract class GameObject {
+public abstract class GameObject implements Serializable {
     public int x,y;
 
     public abstract void paint(Graphics g);
